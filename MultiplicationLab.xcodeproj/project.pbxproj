@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E934BEDB2B0260C500E1AC6A /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E934BEDA2B0260C500E1AC6A /* GameView.swift */; };
+		E934BEDD2B026AD900E1AC6A /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E934BEDC2B026AD900E1AC6A /* ProgressBarView.swift */; };
 		E96094B42AFFEB0D00D2E7AC /* MultiplicationLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96094B32AFFEB0D00D2E7AC /* MultiplicationLabApp.swift */; };
 		E96094B62AFFEB0D00D2E7AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96094B52AFFEB0D00D2E7AC /* ContentView.swift */; };
 		E96094B82AFFEB0E00D2E7AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96094B72AFFEB0E00D2E7AC /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		E934BEDA2B0260C500E1AC6A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		E934BEDC2B026AD900E1AC6A /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		E96094B02AFFEB0D00D2E7AC /* MultiplicationLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiplicationLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96094B32AFFEB0D00D2E7AC /* MultiplicationLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplicationLabApp.swift; sourceTree = "<group>"; };
 		E96094B52AFFEB0D00D2E7AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				E96094B32AFFEB0D00D2E7AC /* MultiplicationLabApp.swift */,
 				E96094B52AFFEB0D00D2E7AC /* ContentView.swift */,
+				E934BEDC2B026AD900E1AC6A /* ProgressBarView.swift */,
 				E934BEDA2B0260C500E1AC6A /* GameView.swift */,
 				E96094B72AFFEB0E00D2E7AC /* Assets.xcassets */,
 				E96094B92AFFEB0E00D2E7AC /* Preview Content */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E96094B62AFFEB0D00D2E7AC /* ContentView.swift in Sources */,
+				E934BEDD2B026AD900E1AC6A /* ProgressBarView.swift in Sources */,
 				E934BEDB2B0260C500E1AC6A /* GameView.swift in Sources */,
 				E96094B42AFFEB0D00D2E7AC /* MultiplicationLabApp.swift in Sources */,
 			);
