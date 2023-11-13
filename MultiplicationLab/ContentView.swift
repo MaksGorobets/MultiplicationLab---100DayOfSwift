@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var questionAmount = 0
     @State private var questionCount = 0
     
-    @State private var number = 0
+    @State private var pickedNumber = 0
     @State private var currentQuestion = ""
     
     @State private var rightAnswer = 0
@@ -72,7 +72,7 @@ struct ContentView: View {
             }
         } else {
             // settings
-            Stepper("Pick a number: \(number)", value: $number, in: 2...9)
+            Stepper("Pick a number: \(pickedNumber)", value: $pickedNumber, in: 2...9)
                 .padding()
             Stepper("Pick a number of questions: \(questionAmount)", value: $questionAmount, in: 1...10)
                 .padding()
@@ -87,11 +87,16 @@ struct ContentView: View {
     
     func buttonText() { // randomizing wrong buttons if it's not ranButtonIndex
         for index in 0...3 {
+            
+            let addedButton = rightAnswer + pickedNumber + index
+            let subtractedButton = rightAnswer - pickedNumber - index
+            
             if index <= 1 {
-                buttonArray[index] = index == ranButtonIndex ? "\(rightAnswer)" : "\(rightAnswer + number + index)"
+                buttonArray[index] = index == ranButtonIndex ? "\(rightAnswer)" : "\(addedButton)"
             } else {
-                buttonArray[index] = index == ranButtonIndex ? "\(rightAnswer)" : "\(rightAnswer - number - index)"
+                buttonArray[index] = index == ranButtonIndex ? "\(rightAnswer)" : "\(subtractedButton <= 0 ? addedButton : subtractedButton)"
             }
+            
         }
     }
     
@@ -101,7 +106,6 @@ struct ContentView: View {
         }
         if playersAnswer == rightAnswer {
             score += 50
-            print("Adding score")
         }
     }
     
@@ -109,16 +113,17 @@ struct ContentView: View {
         usedQuestions.removeAll()
         for _ in 0...questionAmount { // generate set amount of questions
             var rand: Int // random multiplier
+            
             repeat {
                 rand = Int.random(in: 1..<10)
             } while usedQuestions.contains(rand)
+            
             usedQuestions.insert(rand)
-            questions.append([Question(text: "\(number) x \(rand)", answer: number * rand)]) // adding questions one by one
+            questions.append([Question(text: "\(pickedNumber) x \(rand)", answer: pickedNumber * rand)]) // adding questions one by one
         }
     }
     func showQuestion() {
         ranButtonIndex = Int.random(in: 0...3) // which button will contain the right answer
-        print(ranButtonIndex)
         let randomQuestion = questions[questionCount] // they are generated randomly anyways, so picking one with question count doesn't affect anything
         
         currentQuestion = randomQuestion[0].text // extract question
