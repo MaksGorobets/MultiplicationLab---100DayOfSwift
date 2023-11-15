@@ -35,7 +35,7 @@ struct GameView: View {
                 Text("Question \(questionCount) out of \(questionAmount)")
                 Text("Score: \(score)")
             }
-            ProgressBarView(progress: Double(questionCount - 1), total: Double(questionAmount))
+            ProgressBarView(progress: Double(questionCount), total: Double(questionAmount))
                 .frame(height: 10)
             Spacer()
             Text(currentQuestion)
@@ -66,17 +66,22 @@ struct GameView: View {
             .font(.system(size: 20))
             .disabled(alertIsShown)
             .alert("Game ended", isPresented: $alertIsShown) {
-                NavigationLink("OK") {
-                    ContentView()
+                Button("OK") {
                 }
             } message: {
-                Text("You did great!")
+                isResultGood()
             }
             .onAppear {
                     generateQuestions()
                     showQuestion()
             }
         }
+    }
+    
+    func isResultGood() -> Text {
+        let maxScore = questionAmount * 50
+        let halfMaxScore = maxScore / 2
+        return Text(score >= halfMaxScore ? "You did great!" : "You did good, keep practicing!")
     }
     
     func checkAnswer() {
