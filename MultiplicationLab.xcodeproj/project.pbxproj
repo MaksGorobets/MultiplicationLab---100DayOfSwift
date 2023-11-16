@@ -13,6 +13,7 @@
 		E96094B62AFFEB0D00D2E7AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96094B52AFFEB0D00D2E7AC /* ContentView.swift */; };
 		E96094B82AFFEB0E00D2E7AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96094B72AFFEB0E00D2E7AC /* Assets.xcassets */; };
 		E96094BB2AFFEB0E00D2E7AC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E96094BA2AFFEB0E00D2E7AC /* Preview Assets.xcassets */; };
+		E97B2D092B066BB400650A53 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B2D082B066BB400650A53 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		E96094B52AFFEB0D00D2E7AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E96094B72AFFEB0E00D2E7AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E96094BA2AFFEB0E00D2E7AC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E97B2D082B066BB400650A53 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		E96094B22AFFEB0D00D2E7AC /* MultiplicationLab */ = {
 			isa = PBXGroup;
 			children = (
+				E97B2D082B066BB400650A53 /* TestView.swift */,
 				E96094B32AFFEB0D00D2E7AC /* MultiplicationLabApp.swift */,
 				E96094B52AFFEB0D00D2E7AC /* ContentView.swift */,
 				E934BEDC2B026AD900E1AC6A /* ProgressBarView.swift */,
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E96094B62AFFEB0D00D2E7AC /* ContentView.swift in Sources */,
+				E97B2D092B066BB400650A53 /* TestView.swift in Sources */,
 				E934BEDD2B026AD900E1AC6A /* ProgressBarView.swift in Sources */,
 				E934BEDB2B0260C500E1AC6A /* GameView.swift in Sources */,
 				E96094B42AFFEB0D00D2E7AC /* MultiplicationLabApp.swift in Sources */,
@@ -280,6 +284,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MultiplicationLab/Preview Content\"";
+				DEVELOPMENT_TEAM = XUYF93872P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -308,6 +313,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MultiplicationLab/Preview Content\"";
+				DEVELOPMENT_TEAM = XUYF93872P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

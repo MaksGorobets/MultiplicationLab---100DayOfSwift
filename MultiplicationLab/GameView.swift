@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView: View {
     
     @State private var score = 0
+    @State private var scoreScale = 1.0
     
     @State var questionAmount: Int
     @State private var questionCount = 1
@@ -28,13 +29,20 @@ struct GameView: View {
     @State private var usedQuestions = Set<Int>()
     
     @State private var alertIsShown = false
+    @Binding var sheetShown: Bool
     
     var body: some View {
         NavigationStack {
             HStack {
                 Text("Question \(questionCount) out of \(questionAmount)")
-                Text("Score: \(score)")
+                Text("Score:")
+                Text("\(score)")
+                    .foregroundStyle(.orange)
+                    .shadow(radius: 1)
+                    .scaleEffect(CGSize(width: scoreScale, height: scoreScale))
+                    .animation(.spring, value: score)
             }
+            .font(.system(size: 20, weight: .heavy, design: .rounded))
             ProgressBarView(progress: Double(questionCount), total: Double(questionAmount))
                 .frame(height: 10)
             Spacer()
@@ -67,6 +75,7 @@ struct GameView: View {
             .disabled(alertIsShown)
             .alert("Game ended", isPresented: $alertIsShown) {
                 Button("OK") {
+                    sheetShown = false
                 }
             } message: {
                 isResultGood()
@@ -90,6 +99,13 @@ struct GameView: View {
         } else { questionCount += 1 }
         if playersAnswer == rightAnswer {
             score += 50
+            scoreScale = 1.5
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation {
+                    scoreScale = 1.0
+                }
+            }
         }
     }
     
@@ -142,5 +158,5 @@ struct Question {
 }
 
 #Preview {
-    GameView(questionAmount: 5, pickedNumber: 2)
+    GameView(questionAmount: 5, pickedNumber: 2, sheetShown: .constant(false))
 }

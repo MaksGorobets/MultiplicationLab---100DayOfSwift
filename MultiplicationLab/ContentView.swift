@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var pickedNumber = 2
+    @State private var pickedNumber = 2 { didSet {
+            sheetShown = false // Reset sheetShown to prevent infinite loop
+            sheetShown = true
+    }}
     
     @State var sheetShown = false
+    
+    @State var buttonAnimated = [false, false, false, false, false, false, false, false, false]
     
     let animals = ["cow", "bear", "chick", "giraffe", "narwhal", "rhino", "penguin", "parrot", "snake"]
     
@@ -25,6 +30,9 @@ struct ContentView: View {
                             Button {
                                 // action
                                 pickedNumber = number
+                                withAnimation {
+                                    buttonAnimated[number - 1] = true
+                                }
                                 print("Setting pickedNumber to \(number), now it's \(pickedNumber)")
                             } label: {
                                 VStack {
@@ -32,6 +40,11 @@ struct ContentView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 80, height: 70)
+                                        .scaleEffect(CGSize(width: buttonAnimated[number - 1] ? 1.2 : 1.0, height: buttonAnimated[number - 1] ? 1.2 : 1.0))
+                                        .rotation3DEffect(
+                                            Angle(degrees: buttonAnimated[number - 1] ? 360 : 0.0), axis: (x: 0.0, y: 1.0, z: 0.0)
+                                        )
+                                        .shadow(radius: 5)
                                     Text("Multiply by \(number)")
                                         .foregroundStyle(Color("textColor"))
                                 }
@@ -41,21 +54,12 @@ struct ContentView: View {
                         }
                     }
                 }
-                .onChange(of: pickedNumber, initial: false) { oldValue, newValue in
-                    if newValue != oldValue {
-                        // Use DispatchQueue to ensure that the sheet is presented after the state update
-                        DispatchQueue.main.async {
-                            sheetShown = false // Reset sheetShown to prevent infinite loop
-                            sheetShown = true
-                        }
-                    }
-                }
                 Spacer()
                 .buttonStyle(.borderedProminent)
                 .navigationBarBackButtonHidden(true)
                 .navigationTitle("MultiplyLab")
                 .sheet(isPresented: $sheetShown) {
-                    ContentSheetView(pickedNumber: pickedNumber)
+                    ContentSheetView(pickedNumber: pickedNumber, sheetShown: $sheetShown, buttonAnimated: $buttonAnimated)
                 }
         }
     }
@@ -81,10 +85,32 @@ struct ContentSheetView: View {
     
     @State private var questionAmount = 1
     
+    @State private var imageRotation = 0.0
+    
+    @Binding var sheetShown: Bool
+    @Binding var buttonAnimated: Array<Bool>
+    
     var body: some View {
         NavigationStack {
+            HStack {
+                Spacer()
+                Button(role: .destructive) {
+                    sheetShown = false
+                } label: {
+                    Image(systemName: "xmark")
+                }
+            }
+            .padding()
             Spacer()
             Image(ContentView().animals[pickedNumber - 1])
+                .rotation3DEffect(
+                    Angle(degrees: imageRotation), axis: (x: 0.0, y: 1.0, z: 0.0)
+                )
+                .onTapGesture {
+                    withAnimation {
+                        imageRotation += 360
+                    }
+                }
             Text("You picked \(pickedNumber)!")
                 .font(.system(size: 36, weight: .heavy, design: .rounded))
             VStack {
@@ -106,7 +132,7 @@ struct ContentSheetView: View {
             }
             Spacer()
             NavigationLink {
-                GameView(questionAmount: questionAmount, pickedNumber: pickedNumber)
+                GameView(questionAmount: questionAmount, pickedNumber: pickedNumber, sheetShown: $sheetShown)
             } label: {
                 Text("Start!")
                     .frame(width: 200, height: 30)
@@ -116,6 +142,13 @@ struct ContentSheetView: View {
             .clipShape(RoundedRectangle(cornerRadius: 25))
         }
         .presentationBackground(.ultraThinMaterial)
+        .onDisappear {
+            withAnimation {
+                for index in 0..<buttonAnimated.count {
+                    buttonAnimated[index] = false
+                }
+            }
+        }
     }
 }
 
